@@ -9,22 +9,27 @@
 
         <style>
             body {
-                background-color: #ffffff;
+                /* background-color: #ffffff; */
                 height: 100vh;
+
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 overflow: hidden;
+                
                 box-sizing: border-box;
+
+                background: url("./images/car_dashboard7.jpeg") no-repeat center center;
+                background-size: cover;
             }
 
             .tablet-wrapper {
                 width: 90%;
-                max-width: 1000px;
+                max-width: 1300px;
                 aspect-ratio: 16 / 9;
                 background-color: black;
                 padding: 20px;
-                border-radius: 30px;
+                border-radius: 19px;
                 box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
                 display: flex;
                 justify-content: center;
@@ -33,7 +38,7 @@
 
             .tablet {
                 width: 100%;
-                height: 750px;
+                height: 800px;
                 border-radius: 20px;
                 overflow: hidden;
                 background-color: white;
@@ -52,17 +57,17 @@
 
             header{
                 width: 100%;
-                height: 70px;
-                background-color: gray;
+                height: 40px;
+                background-color: black;
                 display: flex;
                 justify-content: space-between;
             }
             
             .name {
-                font-size: 30px;
-                font-weight: 600;
+                font-size: 28px;
+                font-weight: bold;
                 height: fit-content;
-                margin: auto 20px;
+                padding-left: 4%;
                 color: white;
             }
 
@@ -96,15 +101,16 @@
                 margin: 0 40px;
             }
 
+            #skill > h2, #stack > h2 {
+                width: fit-content;
+                margin: 40px;
+            }
+
+            /* ab */
             #closing, #about {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-            }
-
-            #skill > h2, #stack > h2 {
-                width: fit-content;
-                margin: 40px;
             }
 
             .toggleImg {
@@ -130,22 +136,72 @@
                 height: 30px;
             }
 
-            footer {
+            /* footer {
                 width: 100%;
-                height: 50px;
-                background-color: black;
+                height: 40px;
+                background-color: gray;
                 z-index: 999;
                 display: flex;
                 align-items: center;
                 padding: 0 20px;
+            } */
+
+            .temp-footer{
+                width: 100%;
+                height: 40px;
+                /* border: 1px solid red; */
+                background-color: black;
+
+
+                position:absolute;
+                bottom: 0;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
+
+            .temp-footer-left {
+                width: 30%;
+                height: 100%;
+                /* border:1px solid black; */
+
+                display: flex;
+                justify-content: flex-start;    /*왼쪽 정렬*/
+                align-items: center;            /*세로 중앙 정렬*/
+                padding-left: 3%;
+            }
+
+            .temp-footer-left img {
+                max-width: 18%;
+                max-height: 18%;
+                object-fit: contain;
+            }
+
+            .temp-footer-right {
+                width: 70%;
+                height: 100%;
+                /* border:1px solid black; */
+
+                display: flex;
+                justify-content: space-between; /* 아이콘을 가로 균등 분배 */
+                align-items: center;           /* 세로 중앙 */
+                padding: 0 200px;
+            }
+
+            .temp-footer-right img {
+                width: 35%;
+                height: 35%;
+                object-fit: contain;
+            }
+
         </style>
     </head>
     <body>
         <div class="tablet-wrapper">
             <div class="tablet">
                 <header>
-                    <h1 class="name">Dajin</h1>
+                    <h1 class="name">SSAFY</h1>
                     <nav>
                         <ul>
                             <li><a href="#main">Main</a></li>
@@ -181,6 +237,7 @@
                             </button>
                         </div>
                     </div>
+
                     <div id="about" class="container my-5">
                         <div class="row align-items-center">
                             <div class="col-md-4 text-center">
@@ -189,17 +246,20 @@
 
                             <div class="col-md-8">
                                 <h2 class="mb-3">SSAFY</h2>
-                                <p class="lead">사용자 중심의 소프트웨어 개발을 지향하는 개발자입니다. 웹, 임베디드, 앱 개발 등 다양한 프로젝트를 통해 실력을 쌓아왔습니다.</p>
+                                    <p class="lead">사용자 중심의 소프트웨어 개발을 지향하는 개발자입니다. 웹, 임베디드, 앱 개발 등 다양한 프로젝트를 통해 실력을 쌓아왔습니다.</p>
 
-                                <h4 class="mt-4">경력 사항</h4>
-                                <ul class="ps-3" style="display: block;">
-                                    <li style="display: list-item;">삼성 청년 SW 아카데미(SSAFY) 14기</li>
-                                    <li style="display: list-item;">웹/앱/임베디드 프로젝트 다수 수행</li>
-                                </ul>
+                               <h4 class="mt-4">경력 사항</h4>
+                                    <ul class="ps-3" style="display: block;">
+                                        <li style="display: list-item;">삼성 청년 SW 아카데미(SSAFY) 14기</li>
+                                        <li style="display: list-item;">웹/앱/임베디드 프로젝트 다수 수행</li>
+                                    </ul>
 
                             </div>
                         </div>
                     </div>
+
+                
+
                     <div id="skill" class="container">
                         <h2>Skill</h2>
 
@@ -289,6 +349,7 @@
                             </tbody>
                         </table>
                     </div>
+
                     <div id="closing">
                         <div class="card" style="width: 18rem;">
                             <img src="./images/cat1.jpg" class="card-img-top" alt="cat1">
@@ -298,21 +359,42 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                <footer>
-                    <div class="toggleImg">
-                        <a href="#"><img class="carImg" src="./images/car.svg" alt="car"></a>
+                <div class="temp-footer">
+                    <div class="temp-footer-left">
+                        <a href="main.html">
+                            <img src="./images/car.svg" alt="자동차">
+                        </a>
                     </div>
-                    <div class="menuImg">
-                        <img class="menuImages" src="./images/nevi.svg" alt="map">
-                        <img class="menuImages" src="./images/bright.svg" alt="bright">
-                        <img class="menuImages" src="./images/equalize.svg" alt="equalize">
-                        <img class="menuImages" src="./images/chat.svg" alt="chat">
-                        <a href="#main"><img class="menuImages" src="./images/mypage.svg" alt="profile"></a>
-                        <img class="menuImages" src="./images/setting.svg" alt="setting">
+
+                    <div class="temp-footer-right">
+                        <a href="main.html">
+                            <img src="./images/nevi.svg" alt="nevi">
+                        </a>
+                        
+                        <a href="main.html">
+                            <img src="./images/bright.svg" alt="Weather">
+                        </a>
+                        
+                        <a href="main.html">
+                            <img src="./images/equalize.svg" alt="Switch User">
+                        </a>
+                        
+                        <a href="main.html">
+                            <img src="./images/chat.svg" alt="chat">
+                        </a>
+                        
+                        <a href="main.html">
+                            <img src="./images/mypage.svg" alt="My Page">
+                        </a>
+                        
+                        <a href="main.html">
+                            <img src="./images/setting.svg" alt="Setting">
+                        </a>
                     </div>
-                </footer>
+                </div>
             </div>
         </div>
     </body>

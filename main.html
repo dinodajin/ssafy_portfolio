@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Infotainment UI</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body {
+            /* margin: 0; */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+            background: url("./images/car_dashboard7.jpeg") no-repeat center center;
+            background-size: cover;
+        }
+
+        .tablet-wrapper {
+            width: 90%;
+            max-width: 1300px;
+            aspect-ratio: 16 / 9;
+            background-color: black;
+            padding: 20px;
+            border-radius: 19px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .template {
+            background-color:rgb(27, 27, 36);
+            /* border: 25px solid black; */
+            border-radius: 20px;
+
+            width: 100%;
+            height: 800px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            position: relative;
+        }
+
+        /* .template {
+            background-color: white;
+            border: 25px solid black;
+            border-radius: 10px;
+            width: 1300px;
+            height: 800px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            position: relative;
+        } */
+
+        .temp-header {
+            width: 100%;
+            height: 40px;
+            /* border: 1px solid red; */
+
+            font-weight: bold;
+            font-size: 28px;
+            color: white;
+            background-color: black;
+
+            padding-left: 4%;
+            position: absolute;
+            top: 0;
+        }
+
+        .temp-middle {
+            /* border: 1px solid blue; */
+/*  
+            height: calc(100% - 160px); */
+            /* border: 2px solid white; */
+
+            height: 80%;
+            width: 100%;
+
+            position: absolute;
+
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mid-photo {
+            /* border: 2px solid black; */
+            
+            width: 35%;
+            height: 100%;
+
+            background-color: black;
+            /* margin-left: 20px; */
+        }
+
+        .mid-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .mid-right {
+            /* border: 2px solid greenyellow; */
+
+            width: 65%;
+            height: 100%;
+            /* margin-right: 30px; */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mid-map {
+            /* border: 2px solid black; */
+            border-radius: 20px;
+            width: 100%;
+            height: 65%;
+        }
+
+        .mid-map img {
+            border: 2px solid white;
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mid-btns {
+            /* border: 2px solid white; */
+            /* background-color: lightgray; */
+
+            width: 100%;
+            height: 35%;
+
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .btn {
+            border: 2px solid white;
+            height: 50%;
+            width: 33%;
+
+            background-color: lightgray;
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+            
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
+
+        .btn img {
+            width: 30%;
+            height: 40%;
+            object-fit: contain;
+        }
+
+        .temp-footer{
+            width: 100%;
+            height: 50px;
+            /* border: 1px solid red; */
+            background-color: black;
+
+
+            position:absolute;
+            bottom: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .temp-footer-left {
+            width: 30%;
+            height: 100%;
+            /* border:1px solid black; */
+
+            display: flex;
+            justify-content: flex-start;    /*왼쪽 정렬*/
+            align-items: center;            /*세로 중앙 정렬*/
+            padding-left: 3%;
+        }
+
+        .temp-footer-left img {
+            max-width: 18%;
+            max-height: 18%;
+            object-fit: contain;
+        }
+
+        .temp-footer-right {
+            width: 70%;
+            height: 100%;
+            /* border:1px solid black; */
+
+            display: flex;
+            justify-content: space-between; /* 아이콘을 가로 균등 분배 */
+            align-items: center;           /* 세로 중앙 */
+            padding: 0 200px;
+        }
+
+        .temp-footer-right img {
+            width: 35%;
+            height: 35%;
+            object-fit: contain;
+        }
+
+  </style>
+</head>
+<body>
+    <div class ="tablet-wrapper">
+        <div class="template">
+            <div class="temp-header">SSAFY</div>
+            
+            <div class="temp-middle">
+                <div class="mid-photo">
+                    <img src="./images/car.jpg" alt="car">
+                </div>
+
+                <div class="mid-right">
+                    <div class="mid-map">
+                        <img src="./images/map.png" alt="map">
+                    </div>
+                    
+                    <div class="mid-btns">
+                        
+                        <button class="btn btn-outline-dark">
+                            <img src="./images/nevi.svg" alt="nevi">Navigation
+                        </button>
+                        
+                        <button class="btn btn-outline-dark">
+                            <img src="./images/bright.svg" alt="Weather">Weather
+                        </button>
+                        
+                        <button id="myPageBtn" class="btn btn-outline-dark">
+                            <img src="./images/equalize.svg" alt="Switch User">Switch User
+                        </button>
+                        
+                        <button class="btn btn-outline-dark">
+                            <img src="./images/chat.svg" alt="chat">Chat Bot
+                        </button>
+
+                        <button class="btn btn-outline-dark" onclick="location.href='./portfolio.html'">
+                            <img src="./images/mypage.svg" alt="My Page">My page
+                        </button>
+
+                        <button class="btn btn-outline-dark">
+                            <img src="./images/setting.svg" alt="Setting">Setting
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="temp-footer">
+                <div class="temp-footer-left">
+                    <a href="main.html">
+                        <img src="./images/car.svg" alt="자동차">
+                    </a>
+                </div>
+
+                <div class="temp-footer-right">
+                    <a href="main.html">
+                        <img src="./images/nevi.svg" alt="nevi">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/bright.svg" alt="Weather">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/equalize.svg" alt="Switch User">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/chat.svg" alt="chat">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/mypage.svg" alt="My Page">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/setting.svg" alt="Setting">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // document.getElementById("myPageBtn").addEventListener("click", function(){
+        //     window.location.href = "myPage.html";
+        // });
+    </script>
+</body>
+</html>

@@ -96,6 +96,12 @@
                 margin: 0 40px;
             }
 
+            #closing {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             #skill > h2, #stack > h2 {
                 width: fit-content;
                 margin: 40px;
@@ -127,7 +133,7 @@
             footer {
                 width: 100%;
                 height: 50px;
-                background-color: gray;
+                background-color: black;
                 z-index: 999;
                 display: flex;
                 align-items: center;
@@ -265,20 +271,28 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="closing">Closing</div>
+                    <div id="closing">
+                        <div class="card" style="width: 18rem;">
+                            <img src="./images/cat1.jpg" class="card-img-top" alt="cat1">
+                            <div class="card-body">
+                                <h5 class="card-title">감사합니다</h5>
+                                <p class="card-text">https://github.com/dinodajin</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <footer>
                     <div class="toggleImg">
-                        <a href="#"><img class="carImg" src="./images/car.png" alt="car"></a>
+                        <a href="#"><img class="carImg" src="./images/car.svg" alt="car"></a>
                     </div>
                     <div class="menuImg">
-                        <img class="menuImages" src="./images/map.png" alt="map">
-                        <img class="menuImages" src="./images/bright.png" alt="bright">
-                        <img class="menuImages" src="./images/equalize.png" alt="equalize">
-                        <img class="menuImages" src="./images/chat.png" alt="chat">
-                        <a href="#main"><img class="menuImages" src="./images/profile.png" alt="profile"></a>
-                        <img class="menuImages" src="./images/setting.png" alt="setting">
+                        <img class="menuImages" src="./images/nevi.svg" alt="map">
+                        <img class="menuImages" src="./images/bright.svg" alt="bright">
+                        <img class="menuImages" src="./images/equalize.svg" alt="equalize">
+                        <img class="menuImages" src="./images/chat.svg" alt="chat">
+                        <a href="#main"><img class="menuImages" src="./images/mypage.svg" alt="profile"></a>
+                        <img class="menuImages" src="./images/setting.svg" alt="setting">
                     </div>
                 </footer>
             </div>

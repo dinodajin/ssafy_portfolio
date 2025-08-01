@@ -91,13 +91,14 @@
                 object-fit: cover;
             }
 
-            #skill {
+            #skill, #stack {
                 padding: 30px;
+                margin: 0 40px;
             }
 
-            #skill > h2 {
+            #skill > h2, #stack > h2 {
                 width: fit-content;
-                margin: 40px
+                margin: 40px;
             }
 
             .toggleImg {
@@ -225,7 +226,45 @@
                     </div>
 
 
-                    <div id="stack">Stack</div>
+                    <div id="stack">
+                        <h2>Stack</h2>
+                        <table class="table table-striped m-4 align-items-center">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>분야</th>
+                                    <th>스택</th>
+                                    <th>레벨</th>
+                                    <th>프로젝트</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>웹 개발</td>
+                                    <td>HTML/CSS/JavaScript</td>
+                                    <td>⭐⭐⭐⭐</td>
+                                    <td>네이버 페이지 클론 코딩</td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>임베디드 개발</td>
+                                    <td>C++</td>
+                                    <td>⭐⭐⭐⭐⭐</td>
+                                    <td>네이버 페이지 클론 코딩</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>앱 개발</td>
+                                    <td>Flutter</td>
+                                    <td>⭐⭐⭐</td>
+                                    <td>카카오톡 앱 클론 코딩</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div id="closing">Closing</div>
                 </div>
 

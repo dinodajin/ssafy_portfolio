@@ -128,19 +128,11 @@
             align-items: center;
         }
 
-        .mid-map {
+        #map {
             /* border: 2px solid black; */
             border-radius: 20px;
             width: 100%;
             height: 65%;
-        }
-
-        .mid-map img {
-            border: 2px solid white;
-            border-radius: 15px;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .mid-btns {
@@ -242,10 +234,56 @@
                 </div>
 
                 <div class="mid-right">
-                    <div class="mid-map">
-                        <img src="./images/map.png" alt="map">
-                    </div>
-                    
+                    <div id="map"></div>
+                    <!-- api는 규칙 같은거다. 이미 정의되어있고 각종 사용하는데 편한 유틸리티 정의 되어있고
+                    각종 파싱도 개발자가 사용하기 편한 형태로 만들어주는거다.
+                    반면 sdk는 풀 패키지 -->
+                    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb54ceb011e20dafd865054255e57625&autoload=false&libraries=services"></script>
+                    <script>
+                        kakao.maps.load(function () {
+                            let map;
+                            let marker;
+                            let currentPosition;
+                            let markers = [];
+                            const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+                            const places = new kakao.maps.services.Places();
+
+                            function initMap() {
+                                const container = document.querySelector("#map");
+                                const options = {
+                                    center: new kakao.maps.LatLng(37.50136, 127.0396),
+                                    level: 4
+                                };
+                                map = new kakao.maps.Map(container, options);
+                                marker = new kakao.maps.Marker({
+                                    position: options.center,
+                                    map: map
+                                });
+                            }
+                            initMap();
+
+                            function moveTocurrentLocation() {
+                                if(navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(function(position) {
+                                        const latitude = position.coords.latitude;
+                                        const longitude = position.coords.longitude;
+                                        console.log(latitude, longitude);
+                                        const moveLatLng = new kakao.maps.LatLng(latitude, longitude);
+                                        map.setCenter(moveLatLng);
+                                        marker.setPosition(moveLatLng);
+                                    }, function() {
+                                        alert("현재 위치를 가져올 수 없습니다.");
+                                    });
+                                } else {
+                                    alert("이 브라우저는 GPS를 지원하지 않습니다.");
+                                }
+                            }
+
+                            moveTocurrentLocation();
+                        });
+                    </script>
+
                     <div class="mid-btns">
                         
                         <button class="btn btn-outline-dark">

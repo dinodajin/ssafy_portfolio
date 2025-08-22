@@ -10,7 +10,7 @@
         <style>
             * { box-sizing: border-box; }
 
-            body {
+        body {
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -18,9 +18,9 @@
             overflow: hidden;
             background: url("./images/car_dashboard7.jpeg") no-repeat center center;
             background-size: cover;
-            }
+        }
 
-            .tablet-wrapper {
+        .tablet-wrapper {
             width: 90%;
             max-width: 1300px;
             aspect-ratio: 16 / 9;
@@ -31,9 +31,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            }
+        }
 
-            .template {
+        .template {
             background-color: rgb(27, 27, 36);
             border-radius: 20px;
             width: 100%;
@@ -43,21 +43,43 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            }
+        }
 
-            .temp-header {
+
+        .temp-header {
             width: 100%;
             height: 40px;
             font-weight: bold;
             font-size: 28px;
-            color: white;
+            color: #fff;
             background-color: black;
             padding-left: 4%;
             position: absolute;
             top: 0;
-            }
 
-            .temp-middle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 0 18px; 
+        }
+
+        .temp-header .hdr-left {letter-spacing: .5px;}
+        .temp-header .hdr-right {display:flex; align-items: center; gap:14px;}
+
+        #header-time{
+            font-weight: 600;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+
+        #header-weather-icon {
+            width: 25%; height: 25%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 4px rgba(255,255,255,.15));
+        }            
+
+
+        .temp-middle {
             height: 89%;
             width: 100%;
             position: absolute;
@@ -65,107 +87,106 @@
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            }
+        }
 
-            /* 왼쪽 검색결과 패널 */
-            #results-panel {
+        /* 왼쪽 검색결과 패널 */
+        #results-panel {
             width: 0; /* 기본은 숨김 */
             background: #111;
             color: white;
             overflow-y: auto;
             transition: width 0.3s ease;
-            }
-            #results-panel.active { 
-                width: 30%; 
-            }
+        }
+        #results-panel.active { 
+            width: 30%; 
+        }
 
-            #results-panel h3 {
+        #results-panel h3 {
             padding: 10px;
             margin: 0;
             border-bottom: 1px solid #333;
-            }
+        }
 
-            .result-item {
+        .result-item {
             padding: 10px;
             border-bottom: 1px solid #333;
             cursor: pointer;
-            }
+        }
 
-            .result-item:hover {
+        .result-item:hover {
             background: #333;
-            }
+        }
 
-            #map-container {
+        #map-container {
             flex: 1;
             position: relative;
-            }
+        }
 
-            #map {
-                width: 100%;
-                height: 100%;
-                border-radius: 20px;
-                filter: invert(90%) hue-rotate(180deg) brightness(1.0) contrast(100%);
-            }
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            filter: invert(90%) hue-rotate(180deg) brightness(1.0) contrast(100%);
+        }
 
-            #search-bar {
-                position: absolute;
-                
-                top: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 10;
-                display: flex;
-            }
+        #search-bar {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+        }
 
-            #search-input {
-                padding:10px; 
-                border:none; 
-                width:250px;
-                background:#000; 
-                color:#fff; 
-                outline:none;
-            }
+        #search-input {
+            padding:10px; 
+            border:none; 
+            width:250px;
+            background:#000; 
+            color:#fff; 
+            outline:none;
+        }
 
-            #search-input::placeholder { 
-                color:#bbb; 
-            }
+        #search-input::placeholder { 
+            color:#bbb; 
+        }
 
-            #search-input:focus { 
-                background:#000; 
-                color:#fff; 
-            }
+        #search-input:focus { 
+            background:#000; 
+            color:#fff; 
+        }
 
-            #search-button { 
-                background:#444; 
-                color:#fff; 
-                border:none; 
-                cursor:pointer; 
-            }
+        #search-button { 
+            background:#444; 
+            color:#fff; 
+            border:none; 
+            cursor:pointer; 
+        }
 
-            #autocomplete-list {
-                position: absolute;
-                top: 42px; /* 검색창 아래쪽 */
-                left: 0;
-                right: 0;
-                background: #222;
-                border: 1px solid #444;
-                z-index: 20;
-                max-height: 200px;
-                overflow-y: auto;
-                border-radius: 5px;
-            }
+        #autocomplete-list {
+            position: absolute;
+            top: 42px; /* 검색창 아래쪽 */
+            left: 0;
+            right: 0;
+            background: #222;
+            border: 1px solid #444;
+            z-index: 20;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 5px;
+        }
 
-            .autocomplete-item {
-                padding: 8px;
-                cursor: pointer;
-                color: #fff;
-            }
+        .autocomplete-item {
+            padding: 8px;
+            cursor: pointer;
+            color: #fff;
+        }
 
-            .autocomplete-item:hover {
-                background: #444;
-            }
+        .autocomplete-item:hover {
+            background: #444;
+        }
 
-            .temp-footer {
+        .temp-footer {
             width: 100%;
             height: 50px;
             background-color: black;
@@ -174,41 +195,103 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            }
+        }
 
-            .temp-footer-left {
+        .temp-footer-left {
             width: 30%;
             height: 100%;
             display: flex;
             justify-content: flex-start;
             align-items: center;
             padding-left: 3%;
-            }
-            .temp-footer-left img {
+        }
+        .temp-footer-left img {
             max-width: 18%;
             max-height: 18%;
             object-fit: contain;
-            }
+        }
 
-            .temp-footer-right {
+        .temp-footer-right {
             width: 70%;
             height: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 200px;
-            }
-            .temp-footer-right img {
+        }
+        .temp-footer-right img {
             width: 35%;
             height: 35%;
             object-fit: contain;
-            }
+        }
         </style>
     </head>
+
     <body>
+        <script>
+        const OWM_KEY = 'bd5d6f47454827bd01e3bb34c63a212a'; // ← 키 입력
+        
+        function startClock() {
+
+            const el = document.getElementById("header-time");
+
+            const pad = n => String(n).padStart(2,"0");
+            const render = () => {
+            const now = new Date();
+            let h = now.getHours();
+            const m = now.getMinutes();
+            const ampm = h >= 12 ? "PM" : "AM";
+            h = h % 12; if (h === 0) h = 12;          // 12시간제
+            el.textContent = `${ampm} ${pad(h)}:${pad(m)}`;
+
+            // 다음 '분' 경계에 맞춰 예약
+            const msToNextMin = (60 - now.getSeconds())*1000 - now.getMilliseconds();
+            setTimeout(render, Math.max(msToNextMin, 500));
+        };
+        render(); // 최초 1회 렌더
+    }
+
+    // 현재 위치로 날씨 아이콘만 채우기
+    async function setHeaderWeatherIcon(lat, lon) {
+        try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&lang=kr`;
+        const { data } = await axios.get(url);
+        const icon = data.weather?.[0]?.icon;           // ex) "10d"
+        if (icon) {
+            const img = document.getElementById("header-weather-icon");
+            img.src = `https://openweathermap.org/img/wn/${icon}.png`;
+            img.alt = data.weather?.[0]?.description || "weather";
+        }
+        } catch (e) {
+        console.error("헤더 아이콘 로드 실패:", e);
+        }
+    }
+
+    // 페이지 로드 후: 시계 시작 + 위치 얻어 아이콘 표시
+    window.addEventListener("load", () => {
+        startClock();
+
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => setHeaderWeatherIcon(pos.coords.latitude, pos.coords.longitude),
+            _   => setHeaderWeatherIcon(37.5665, 126.9780) // 실패 시 서울
+        );
+        } else {
+        setHeaderWeatherIcon(37.5665, 126.9780);
+        }
+    });
+    </script>
+
+
     <div class ="tablet-wrapper">
         <div class="template">
-        <div class="temp-header">SSAFY</div>
+            <div class="temp-header">
+                <div class="hdr-left">SSAFY</div>
+                <div class="hdr-right">
+                    <span id="header-time">--:--</span>
+                    <img id="header-weather-icon" alt="weather">
+                </div>
+            </div>
 
         <div class="temp-middle">
             <div id="results-panel">
@@ -235,7 +318,7 @@
             </div>
             <div class="temp-footer-right">
             <a href="./navigation.html"><img src="./images/navi.svg" alt="navi"></a>
-            <a href="main.html"><img src="./images/bright.svg" alt="Weather"></a>
+            <a href="./toWeather.html"><img src="./images/bright.svg" alt="Weather"></a>
             <a href="main.html"><img src="./images/equalize.svg" alt="Switch User"></a>
             <a href="main.html"><img src="./images/chat.svg" alt="chat"></a>
             <a href="./portfolio.html"><img src="./images/mypage.svg" alt="My Page"></a>

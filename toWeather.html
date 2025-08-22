@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d5863a5b33c84397a468ea48e30068&libraries=services"></script>
+
+    <title>날씨정보</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: url("./images/car_dashboard7.jpeg") no-repeat center center;
+            background-size: cover;
+        }
+
+        .tablet-wrapper {
+            width: 90%;
+            max-width: 1300px;
+            aspect-ratio: 16 / 9;
+            background-color: black;
+            padding: 20px;
+            border-radius: 19px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .template {
+            background-color:rgb(27, 27, 36);
+            border-radius: 20px;
+            width: 100%;
+            height: 800px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .temp-header {
+            width: 100%;
+            height: 40px;
+            font-weight: bold;
+            font-size: 28px;
+            color: #fff;
+            background-color: black;
+            padding-left: 4%;
+            position: absolute;
+            top: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 0 18px; 
+        }
+
+        .temp-header .hdr-left {letter-spacing: .5px;}
+        .temp-header .hdr-right {display:flex; align-items: center; gap:14px;}
+
+        #header-time{
+            font-weight: 600;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+
+        #header-weather-icon {
+            width: 25%; height: 25%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 4px rgba(255,255,255,.15));
+        }
+
+        .temp-middle {
+            height: calc(100% - 160px);
+            /* border: 2px solid white; */
+
+            height: 80%;
+            width: 100%;
+
+            position: absolute;
+/* 
+            display:flex;
+            justify-content: space-between;
+            align-items: center; */
+
+            display:flex;   /* flex 컨테이너 */
+            justify-content: space-around;  /* 카드 간격 균등 분배*/
+            align-items: center;            /* 세로 중앙 정렬 */
+
+            
+        }
+
+        .weather-card {
+
+            display : flex;
+            flex-direction: column;
+
+            color: #f1f3f5;
+
+            width: 17%;
+            height: 55%;
+            margin: 0 1%;
+            padding: 2%;             /* 카드 테두리와 내용 사이 여백 */
+
+            background: #16161d;
+            border-radius: 12px;
+            border: 1px solid white;
+        }
+
+        .weather-card .top {
+            flex: 0 0 18%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*border: 1px solid red;    /* top 영역 확인용 */
+        }
+
+        .weather-card .mid {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*border: 1px solid green;  /* mid 영역 확인용 */
+        }
+
+        .weather-card .bottom {
+            flex: 0 0 55%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*border: 1px solid blue;    bottom 영역 확인용 */
+            gap: 5%;
+        }
+
+        .weather-card .bottom .details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6%;
+        }
+
+        .weather-card .bottom .details > div {
+            margin-bottom: 5%;
+        }
+
+        .weather-card .mid .temp {
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .weather-card .bottom,
+        .weather-card .bottom * {
+            color : rgba(255,255,255,0.9);
+        }
+
+        
+        /* 날짜 라벨 */
+        .weather-card .top .date {
+        color: #fff;
+        font-weight: 600;
+        }
+
+        .temp-footer{
+            width: 100%;
+            height: 50px;
+            /* border: 1px solid red; */
+            background-color: black;
+
+
+            position:absolute;
+            bottom: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .temp-footer-left {
+            width: 30%;
+            height: 100%;
+            /* border:1px solid black; */
+
+            display: flex;
+            justify-content: flex-start;    /*왼쪽 정렬*/
+            align-items: center;            /*세로 중앙 정렬*/
+            padding-left: 3%;
+        }
+
+        .temp-footer-left img {
+            max-width: 18%;
+            max-height: 18%;
+            object-fit: contain;
+        }
+
+        .temp-footer-right {
+            width: 70%;
+            height: 100%;
+            /* border:1px solid black; */
+
+            display: flex;
+            justify-content: space-between; /* 아이콘을 가로 균등 분배 */
+            align-items: center;           /* 세로 중앙 */
+            padding: 0 200px;
+        }
+
+        .temp-footer-right img {
+            width: 35%;
+            height: 35%;
+            object-fit: contain;
+        }
+
+    </style>
+</head>
+<body>
+    <script>
+        const weatherKey = 'bd5d6f47454827bd01e3bb34c63a212a'
+
+        // 유틸적으로 동작 가능한 현재 날짜 반환 함수
+        function dateKey(tsSec, tzOffsetSec) {
+            const ms = (tsSec + tzOffsetSec) * 1000;
+            const d = new Date(ms);
+            const y = d.getUTCFullYear();
+            const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+            const day = String(d.getUTCDate()).padStart(2, "0");
+            return `${y}-${m}-${day}`;
+        }
+
+        function dateLabel(tsSec, tzOffsetSec) {
+            const ms = (tsSec + tzOffsetSec) * 1000;
+            const d = new Date(ms);
+            const wd = ["일","월","화","수","목","금","토"][d.getUTCDay()];
+            const m  = String(d.getUTCMonth()+1).padStart(2,"0");
+            const dd = String(d.getUTCDate()).padStart(2,"0");
+            const y  = d.getUTCFullYear();
+            return `${m}월 ${dd}일 ${wd}요일`;
+        }
+        
+        // 현재 위치 가져오기
+        function getPosition() {
+            return new Promise(res=>{
+                if(!navigator.geolocation) return res({lat:37.5665, lon:126.9780}); // 서울
+                navigator.geolocation.getCurrentPosition(
+
+                    p => res({lat:p.coords.latitude, lon:p.coords.longitude}),
+                    _ => res({lat:37.5665, lon:126.9780}),
+                    { enableHighAccuracy:true, timeout:6000 }
+                );
+            });
+
+        }
+
+        // 데이터 가져오기 오늘 + 4일
+        async function fetchFiveDays(lat, lon){
+
+            const base = "https://api.openweathermap.org/data/2.5";
+            const qs   = `lat=${lat}&lon=${lon}&appid=${weatherKey}&units=metric&lang=kr`;
+
+            const [curRes, fcRes] = await Promise.all([
+                axios.get(`${base}/weather?${qs}`),
+                axios.get(`${base}/forecast?${qs}`)
+            ]);
+
+            const cur = curRes.data;
+            const fc  = fcRes.data;
+            const tz  = cur.timezone ?? 0;
+
+            const todayK = dateKey(cur.dt, tz);
+
+
+            // 오늘(현재값)
+            const result = [{
+                key: todayK, isToday:true,
+                label: dateLabel(cur.dt, tz),
+                temp: cur.main.temp,
+                feels: cur.main.feels_like,
+                hum: cur.main.humidity,
+                wind: cur.wind.speed,
+                desc: cur.weather[0].description,
+                icon: cur.weather[0].icon
+            }];
+
+            // 예보를 날짜별로 그룹
+            const byDate = new Map();
+            for(const item of fc.list){
+                const k = dateKey(item.dt, tz);
+                if(!byDate.has(k)) byDate.set(k, []);
+                byDate.get(k).push(item);
+            }
+
+            // 내일부터 4일: 정오(12:00) 우선, 없으면 중간값
+            const keys = [...byDate.keys()].filter(k=>k!==todayK).sort().slice(0,4);
+            for(const k of keys){
+                const items = byDate.get(k);
+                let pick = items.find(it=>{
+                const h = new Date((it.dt + tz)*1000).getUTCHours();
+                return h === 12;
+                }) || items[Math.floor(items.length/2)];
+
+                result.push({
+                key:k, isToday:false,
+                label: dateLabel(pick.dt, tz),
+                temp: pick.main.temp,
+                feels: pick.main.feels_like,
+                hum: pick.main.humidity,
+                wind: pick.wind.speed,
+                desc: pick.weather[0].description,
+                icon: pick.weather[0].icon
+                });
+            }
+
+            return result.slice(0,5);
+
+        }
+
+        // async function testWeather() {
+        // const { lat, lon } = await getPosition();          // 현재 위치 얻기
+        // const days = await fetchFiveDays(lat, lon);        // 오늘+4일 총 5개 데이터
+
+        // console.log("5일치 날씨 데이터:", days);
+
+        // // 하나씩 예쁘게 찍어보기
+        // days.forEach((d, i) => {
+        //     console.log(
+        //     `날짜[${i}]: ${d.label} ${d.isToday ? "(오늘)" : ""}`,
+        //     `\n  기온: ${d.temp}°C`,
+        //     `\n  체감: ${d.feels}°C`,
+        //     `\n  습도: ${d.hum}%`,
+        //     `\n  바람: ${d.wind} m/s`,
+        //     `\n  날씨: ${d.desc}`,
+        //     `\n  아이콘코드: ${d.icon}`
+        //     );
+        // });
+        // }
+
+
+        function cardHTML(d) {
+        return `
+            <div class="weather-card">
+            <div class="top">
+                <div class="date">${d.label}</div>
+            </div>
+
+            <div class="mid">
+                <img class="icon" src="https://openweathermap.org/img/wn/${d.icon}@2x.png" alt="${d.desc}">
+            </div>
+
+            <div class="bottom">
+                <div class="details">
+                <div>${d.desc}</div>    
+                <div>온도 : ${Math.round(d.temp)}°C</div>
+                <div>습도 : ${d.hum}%</div>
+                <div>바람 : ${d.wind.toFixed(1)} m/s</div>
+                </div>
+            </div>
+            </div>`;
+        }
+
+
+        function startClock() {
+            const el = document.getElementById("header-time");
+            const pad = n => String(n).padStart(2, "0");
+            const render = () => {
+                const now = new Date();
+                let h = now.getHours();
+                const m = now.getMinutes();
+                const ampm = h >= 12 ? "PM" : "AM";
+                h = h % 12 || 12; // 12시간제
+                el.textContent = `${ampm} ${pad(h)}:${pad(m)}`;
+                const msToNextMin = (60 - now.getSeconds())*1000 - now.getMilliseconds();
+                setTimeout(render, Math.max(msToNextMin, 500));
+            };
+            render();
+        }
+
+        function setHeaderIconFromDay(day) {
+            const img = document.getElementById("header-weather-icon");
+            img.src = `https://openweathermap.org/img/wn/${day.icon}.png`; // 고해상도
+            img.alt = day.desc || "weather";
+        }
+
+        async function initWeatherCards() {
+
+            const { lat, lon } = await getPosition();
+            const days = await fetchFiveDays(lat, lon);   // ← 단 한 번 호출
+
+            // 카드 렌더
+            const wrap = document.querySelector(".temp-middle");
+            wrap.innerHTML = days.slice(0,5).map(cardHTML).join("");
+
+            // 헤더 시간 시작 + 오늘 아이콘 표시 (재사용)
+            startClock();
+            if (days.length) setHeaderIconFromDay(days[0]);
+        }
+
+        window.addEventListener("load", initWeatherCards);
+        
+    </script>
+
+    <div class ="tablet-wrapper">
+        <div class="template">
+            <div class="temp-header">
+                <div class="hdr-left">SSAFY</div>
+                <div class="hdr-right">
+                    <span id="header-time">--:--</span>
+                    <img id="header-weather-icon" alt="weather">
+                </div>
+            </div>
+            
+            <div class="temp-middle"></div>
+            
+            <div class="temp-footer">
+                <div class="temp-footer-left">
+                    <a href="main.html">
+                        <img src="./images/car.svg" alt="자동차">
+                    </a>
+                </div>
+
+                <div class="temp-footer-right">
+                    <a href="./navigation.html">
+                        <img src="./images/navi.svg" alt="navi">
+                    </a>
+                    
+                    <a href="./toWeather.html">
+                        <img src="./images/bright.svg" alt="Weather">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/equalize.svg" alt="Switch User">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/chat.svg" alt="chat">
+                    </a>
+                    
+                    <a href="./portfolio.html">
+                        <img src="./images/mypage.svg" alt="My Page">
+                    </a>
+                    
+                    <a href="main.html">
+                        <img src="./images/setting.svg" alt="Setting">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

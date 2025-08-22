@@ -13,13 +13,11 @@
         }
 
         body {
-            /* margin: 0; */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-
             background: url("./images/car_dashboard7.jpeg") no-repeat center center;
             background-size: cover;
         }
@@ -39,74 +37,41 @@
 
         .template {
             background-color:rgb(27, 27, 36);
-            /* border: 25px solid black; */
             border-radius: 20px;
-
             width: 100%;
             height: 800px;
-
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-
             position: relative;
         }
-
-        /* .template {
-            background-color: white;
-            border: 25px solid black;
-            border-radius: 10px;
-            width: 1300px;
-            height: 800px;
-
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-
-            position: relative;
-        } */
 
         .temp-header {
             width: 100%;
             height: 40px;
-            /* border: 1px solid red; */
-
             font-weight: bold;
             font-size: 28px;
             color: white;
             background-color: black;
-
             padding-left: 4%;
             position: absolute;
             top: 0;
         }
 
         .temp-middle {
-            /* border: 1px solid blue; */
-/*  
-            height: calc(100% - 160px); */
-            /* border: 2px solid white; */
-
             height: 80%;
             width: 100%;
-
             position: absolute;
-
             display:flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .mid-photo {
-            /* border: 2px solid black; */
-            
             width: 35%;
             height: 100%;
-
             background-color: black;
-            /* margin-left: 20px; */
         }
 
         .mid-photo img {
@@ -116,12 +81,8 @@
         }
 
         .mid-right {
-            /* border: 2px solid greenyellow; */
-
             width: 65%;
             height: 100%;
-            /* margin-right: 30px; */
-
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -129,19 +90,14 @@
         }
 
         #map {
-            /* border: 2px solid black; */
             border-radius: 20px;
             width: 100%;
             height: 65%;
         }
 
         .mid-btns {
-            /* border: 2px solid white; */
-            /* background-color: lightgray; */
-
             width: 100%;
             height: 35%;
-
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
@@ -154,12 +110,10 @@
             border: 2px solid white;
             height: 50%;
             width: 33%;
-
             background-color: lightgray;
             font-weight: bold;
             font-size: 20px;
             color: black;
-            
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -175,13 +129,9 @@
         .temp-footer{
             width: 100%;
             height: 50px;
-            /* border: 1px solid red; */
             background-color: black;
-
-
             position:absolute;
             bottom: 0;
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -190,8 +140,6 @@
         .temp-footer-left {
             width: 30%;
             height: 100%;
-            /* border:1px solid black; */
-
             display: flex;
             justify-content: flex-start;    /*왼쪽 정렬*/
             align-items: center;            /*세로 중앙 정렬*/
@@ -207,8 +155,6 @@
         .temp-footer-right {
             width: 70%;
             height: 100%;
-            /* border:1px solid black; */
-
             display: flex;
             justify-content: space-between; /* 아이콘을 가로 균등 분배 */
             align-items: center;           /* 세로 중앙 */
@@ -287,7 +233,7 @@
                     <div class="mid-btns">
                         
                         <button class="btn btn-outline-dark">
-                            <img src="./images/nevi.svg" alt="nevi">Navigation
+                            <img src="./images/navi.svg" alt="navi" onclick="location.href='./Navigation.html'">Navigation
                         </button>
                         
                         <button class="btn btn-outline-dark">
@@ -321,10 +267,9 @@
                         <img src="./images/car.svg" alt="자동차">
                     </a>
                 </div>
-
                 <div class="temp-footer-right">
                     <a href="main.html">
-                        <img src="./images/nevi.svg" alt="nevi">
+                        <img src="./images/navi.svg" alt="navi">
                     </a>
                     
                     <a href="main.html">
